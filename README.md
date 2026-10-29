@@ -1,4 +1,4 @@
-# Game Launch Monitor
+# Grok UA (User Acquisition) Research Agent
 
 Marketing-intelligence tool that uses Grok (xAI API, live X search) to watch X posts about a game launch
 across languages (zh, ja, ko, en), classify each post (sentiment, bug report, praise, question, influencer
@@ -82,7 +82,7 @@ The brief accepts `description`/`differentiators` up to 5000 chars and `seed_key
 
 ## Roadmap
 
-Discord alerts, MCP server, GCP Cloud Run deploy, Firestore repository, OpenAI model comparison.
+Discord alerts, MCP server, Supabase (Postgres) repository, Vercel deploy, OpenAI model comparison.
 
 ## UA research (X → Grok UA brief)
 
@@ -110,3 +110,20 @@ Knobs: `RESEARCH_MAX_SEARCHES` (8), `RESEARCH_GROK_COST_PER_SEARCH_USD` (0.25, p
 `RESEARCH_SEARCH_DAYS` (90), `RESEARCH_GROK_MAX_TOOL_CALLS` (3), `RESEARCH_EXCLUDED_HANDLES` (deal bots).
 Posts without a real x.com status URL, outside the window (by snowflake id time) or not among
 Grok's citations are dropped. Follower counts from Grok are marked "reported by Grok (unverified)".
+
+### Grok x_search vs. X API: which collector to use
+
+Two ways to get X data into this tool, billed to different accounts:
+
+| | Grok `x_search` (default) | X API v2 (`x_api`) |
+|---|---|---|
+| Billing | xAI API credits (same balance as Grok) | Separate X developer account, pay-per-use credits |
+| Setup | `XAI_API_KEY` only | `X_BEARER_TOKEN` + purchased X credits |
+| Post search | Grok picks and filters relevant posts; good semantic relevance, multilingual | Exact query syntax (`lang:`, `-is:retweet`), full control over what is pulled |
+| Follower counts / author data | Not reliably returned; marked "reported by Grok (unverified)" | Exact `public_metrics` from X user expansions |
+| Best for | Player phrasing, hooks, complaints | Creator/influencer shortlists where reach numbers matter |
+
+Key learning: the xAI credits alone are enough to search X through Grok, but if accurate follower
+counts matter (e.g. ranking creators for outreach), use the X API, which returns verified author metrics.
+A real first run (Oct 2026) with Grok `x_search` cost $0.71 for 5 searches, 28 usable posts, with zero
+hallucinated posts but no follower counts.
