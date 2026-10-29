@@ -77,8 +77,7 @@ export default function App() {
   return (
     <main>
       <header className="row spread">
-        <h1>UA Research Agent</h1>
-        <span className="muted">Game Launch Monitor</span>
+        <h1>Grok UA Research Agent</h1>
       </header>
       <div className="layout">
         <aside>
