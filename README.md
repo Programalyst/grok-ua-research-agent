@@ -4,6 +4,10 @@ Marketing-intelligence tool that uses Grok (xAI API, live X search) to watch X p
 across languages (zh, ja, ko, en), classify each post (sentiment, bug report, praise, question, influencer
 spike), and surface insights.
 
+<img src="images/Grok-UA-agent-1.png" alt="Alt text" width="1000">
+<img src="images/Grok-UA-agent-2.png" alt="Alt text" width="800">
+<img src="images/Grok-UA-agent-3.png" alt="Alt text" width="800">
+
 ```
 backend/   FastAPI (uv, Python 3.11)  -> http://localhost:8000  (docs at /docs)
 frontend/  Vite + React + TS + TanStack Query -> http://localhost:5173 (proxies /api to :8000)
